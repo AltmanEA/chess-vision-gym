@@ -180,6 +180,16 @@
   border: 2px solid #f5c6cb;
 }
 
+.puzzle-hint {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #fff3cd;
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #856404;
+}
+
 .puzzle-themes {
   display: flex;
   flex-wrap: wrap;

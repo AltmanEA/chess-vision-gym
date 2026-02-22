@@ -1,29 +1,80 @@
-import { Puzzle } from './components/Puzzle'
+import { useState, useEffect } from 'react'
+import { PuzzleList, PuzzleContainer, StatisticsScreen } from './components'
 import { StatisticsProvider } from './hooks'
 import type { Puzzle as PuzzleType } from './types/puzzle'
 import './App.css'
 
-// Пример задачи для демонстрации (тип "move")
-const examplePuzzle: PuzzleType = {
-  id: 'move-001',
-  type: 'move',
-  fen: 'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 3',
-  instruction: 'Найдите лучший ход для белых',
-  answer: {
-    moves: ['c4f7'],
-    allowAlternatives: false,
-  },
-  themes: ['tactics', 'fork', 'knight'],
-  difficulty: 'intermediate',
-  rating: 1400,
-}
+type Screen = 'list' | 'puzzle' | 'stats'
 
 function App() {
+  const [currentScreen, setCurrentScreen] = useState<Screen>('list')
+  const [selectedPuzzle, setSelectedPuzzle] = useState<PuzzleType | null>(null)
+  const [puzzles, setPuzzles] = useState<PuzzleType[]>([])
+
+  // Загрузка задач при монтировании
+  useEffect(() => {
+    fetch('/puzzles/examples.json')
+      .then((res) => res.json())
+      .then((data) => setPuzzles(data.puzzles || []))
+      .catch((err) => console.error('Ошибка загрузки задач:', err))
+  }, [])
+
+  // Выбор задачи
+  function handleSelectPuzzle(puzzle: PuzzleType) {
+    setSelectedPuzzle(puzzle)
+    setCurrentScreen('puzzle')
+  }
+
+  // Возврат к списку
+  function handleBackToList() {
+    setCurrentScreen('list')
+    setSelectedPuzzle(null)
+  }
+
+  // Показать статистику
+  function handleShowStats() {
+    setCurrentScreen('stats')
+  }
+
+  // Рендер текущего экрана
+  function renderScreen() {
+    switch (currentScreen) {
+      case 'list':
+        return (
+          <PuzzleList
+            onSelectPuzzle={handleSelectPuzzle}
+            onShowStats={handleShowStats}
+          />
+        )
+      case 'puzzle':
+        if (!selectedPuzzle) return null
+        return (
+          <PuzzleContainer
+            key={selectedPuzzle.id}
+            puzzle={selectedPuzzle}
+            puzzles={puzzles}
+            onBackToList={handleBackToList}
+            onSelectPuzzle={handleSelectPuzzle}
+          />
+        )
+      case 'stats':
+        return <StatisticsScreen onBack={handleBackToList} />
+      default:
+        return null
+    }
+  }
+
   return (
     <StatisticsProvider>
       <div className="app">
-        <h1>Шахматный тренажер</h1>
-        <Puzzle puzzle={examplePuzzle} />
+        <header className="app__header">
+          <h1 className="app__title" onClick={handleBackToList}>
+            ♟️ Chess Vision Gym
+          </h1>
+        </header>
+        <main className="app__main">
+          {renderScreen()}
+        </main>
       </div>
     </StatisticsProvider>
   )

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Chessboard } from 'react-chessboard'
 import { Chess } from 'chess.js'
 import type { Puzzle } from '../types/puzzle'
@@ -12,12 +12,14 @@ interface PuzzleProps {
   puzzle: Puzzle
   /** Колбэк при завершении решения */
   onSolve?: (isCorrect: boolean) => void
+  /** Флаг для сброса задачи */
+  resetKey?: number
 }
 
 /**
  * Компонент для отображения шахматной задачи с доской
  */
-export function Puzzle({ puzzle, onSolve }: PuzzleProps) {
+export function Puzzle({ puzzle, onSolve, resetKey }: PuzzleProps) {
   const [game, setGame] = useState(() => {
     const initialGame = loadPositionFromFen(puzzle.fen)
     return initialGame || new Chess()
@@ -34,6 +36,16 @@ export function Puzzle({ puzzle, onSolve }: PuzzleProps) {
     resetAnswer,
     submitAnswer,
   } = usePuzzleAnswer({ puzzle, onSolve })
+
+  // Сброс при изменении resetKey
+  useEffect(() => {
+    const initialGame = loadPositionFromFen(puzzle.fen)
+    if (initialGame) {
+      setGame(initialGame)
+    }
+    resetAnswer()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetKey, puzzle.fen])
 
   /**
    * Выполняет ход в шахматной партии
@@ -114,21 +126,39 @@ export function Puzzle({ puzzle, onSolve }: PuzzleProps) {
   }
 
   /**
-   * Формирует стили для выделения выбранного поля
+   * Формирует стили для выделения полей
    */
   const customSquareStyles = useMemo(() => {
-    if (!isFieldAnswer(state.answer) || !state.answer.value) {
-      return {}
-    }
+    const styles: Record<string, { backgroundColor: string }> = {}
 
-    const square = state.answer.value
-    return {
-      [square]: {
+    // Выделение выбранного поля для типа field
+    if (isFieldAnswer(state.answer) && state.answer.value) {
+      const square = state.answer.value
+      styles[square] = {
         backgroundColor: state.result === 'correct' ? 'rgba(76, 175, 80, 0.5)' :
                        state.result === 'incorrect' ? 'rgba(244, 67, 54, 0.5)' :
                        'rgba(33, 150, 243, 0.5)',
-      },
+      }
     }
+
+    // Выделение полей последнего хода для move/sequence
+    if ((state.answer.type === 'move' || state.answer.type === 'sequence') && state.answer.value) {
+      const moves = state.answer.type === 'move' 
+        ? [state.answer.value] 
+        : state.answer.value
+      
+      if (moves.length > 0) {
+        const lastMove = moves[moves.length - 1]
+        if (lastMove.length >= 4) {
+          const from = lastMove.slice(0, 2)
+          const to = lastMove.slice(2, 4)
+          styles[from] = { backgroundColor: 'rgba(255, 193, 7, 0.4)' }
+          styles[to] = { backgroundColor: 'rgba(255, 193, 7, 0.4)' }
+        }
+      }
+    }
+
+    return styles
   }, [state.answer, state.result])
 
   /**
@@ -139,6 +169,9 @@ export function Puzzle({ puzzle, onSolve }: PuzzleProps) {
       return (
         <div className={`puzzle-result puzzle-result--${state.result}`}>
           {state.result === 'correct' ? '✓ Правильно!' : '✗ Неправильно'}
+          {state.result === 'incorrect' && puzzle.hints && puzzle.hints.length > 0 && (
+            <div className="puzzle-hint">💡 {puzzle.hints[0]}</div>
+          )}
         </div>
       )
     }
