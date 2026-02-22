@@ -1,0 +1,159 @@
+{
+  "name": "Примеры задач Chess Vision Gym",
+  "description": "Примеры задач всех типов для демонстрации формата",
+  "version": "1.0.0",
+  "puzzles": [
+    {
+      "id": "field-001",
+      "type": "field",
+      "fen": "r1r3k1/ppq3bQ/4p2p/4n3/3p4/2P5/PBB2PPP/4R1K1 b - - 0 1",
+      "instruction": "Где находится чёрный король?",
+      "answer": {
+        "field": "g8"
+      },
+      "themes": ["pieceLocation", "kingSafety"],
+      "difficulty": "beginner",
+      "rating": 800,
+      "hints": [
+        "Король находится на последней горизонтали",
+        "На g-линии"
+      ]
+    },
+    {
+      "id": "field-002",
+      "type": "field",
+      "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1",
+      "instruction": "На каком поле находится белая пешка e?",
+      "answer": {
+        "field": "e4"
+      },
+      "themes": ["pawnStructure"],
+      "difficulty": "beginner",
+      "rating": 600
+    },
+    {
+      "id": "move-001",
+      "type": "move",
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 3",
+      "instruction": "Найдите лучший ход для белых",
+      "answer": {
+        "moves": ["c4f7"],
+        "allowAlternatives": false
+      },
+      "themes": ["tactics", "fork", "knight"],
+      "difficulty": "intermediate",
+      "rating": 1400,
+      "hints": [
+        "Конь может атаковать две фигуры одновременно",
+        "Обратите внимание на чёрного короля и ферзя"
+      ]
+    },
+    {
+      "id": "move-002",
+      "type": "move",
+      "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+      "instruction": "Найдите ход, который даёт мат в один ход",
+      "answer": {
+        "moves": ["h5f7"]
+      },
+      "themes": ["tactics", "mateInOne", "queen"],
+      "difficulty": "beginner",
+      "rating": 1000
+    },
+    {
+      "id": "move-003",
+      "type": "move",
+      "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+      "instruction": "Сделайте первый ход (любой из стандартных дебютных ходов)",
+      "answer": {
+        "moves": ["e2e4", "d2d4", "g1f3", "c2c4", "b1c3"],
+        "allowAlternatives": true
+      },
+      "themes": ["opening"],
+      "difficulty": "beginner",
+      "rating": 500
+    },
+    {
+      "id": "sequence-001",
+      "type": "sequence",
+      "fen": "r1r3k1/ppq3bQ/4p2p/4n3/3p4/2P5/PBB2PPP/4R1K1 b - - 0 1",
+      "instruction": "Найдите мат в 3 хода",
+      "answer": {
+        "moves": [
+          "g8f8",
+          "b2a3",
+          "f8f7",
+          "c2d1",
+          "c8h8",
+          "d1h5",
+          "f7f6",
+          "h7e4"
+        ],
+        "includeOpponentMoves": true
+      },
+      "themes": ["tactics", "mate", "attack"],
+      "difficulty": "advanced",
+      "rating": 2000
+    },
+    {
+      "id": "sequence-002",
+      "type": "sequence",
+      "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+      "instruction": "Найдите мат в 2 хода",
+      "answer": {
+        "moves": [
+          "c4f7",
+          "e8f7",
+          "h5f7"
+        ],
+        "includeOpponentMoves": true
+      },
+      "themes": ["tactics", "mateInTwo", "queen", "bishop"],
+      "difficulty": "intermediate",
+      "rating": 1600
+    },
+    {
+      "id": "lichess-005yO",
+      "type": "lichess",
+      "puzzleId": "005yO",
+      "fen": "r1r3k1/ppq3bQ/4p2p/4n3/3p4/2P5/PBB2PPP/4R1K1 b - - 0 1",
+      "answer": {
+        "moves": [
+          "g8f8",
+          "b2a3",
+          "f8f7",
+          "c2d1",
+          "c8h8",
+          "d1h5",
+          "f7f6",
+          "h7e4"
+        ]
+      },
+      "rating": 2789,
+      "ratingDeviation": 98,
+      "popularity": 87,
+      "nbPlays": 187,
+      "gameUrl": "https://lichess.org/j65YI8hC/black#48",
+      "themes": ["advantage", "exposedKing", "middlegame", "quietMove"]
+    },
+    {
+      "id": "lichess-12345",
+      "type": "lichess",
+      "puzzleId": "12345",
+      "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+      "answer": {
+        "moves": [
+          "c4f7",
+          "e8f7",
+          "h5f7"
+        ]
+      },
+      "rating": 1450,
+      "ratingDeviation": 75,
+      "popularity": 65,
+      "nbPlays": 543,
+      "gameUrl": "https://lichess.org/training/12345",
+      "themes": ["mateInTwo", "queen", "bishop", "short"]
+    }
+  ]
+}

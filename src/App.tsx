@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Chessboard } from 'react-chessboard'
 import { Chess } from 'chess.js'
 import { validateFen, loadPositionFromFen, setInitialPosition } from './utils/fenUtils'
+import { StatisticsProvider } from './hooks'
 import './App.css'
 
 function App() {
@@ -32,33 +33,35 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <h1>Шахматный тренажер</h1>
-      <div>
-        <input 
-          type="text" 
-          value={fen} 
-          onChange={(e) => setFen(e.target.value)} 
-          placeholder="Введите FEN позицию"
-        />
-        <button onClick={() => {
-          if (validateFen(fen)) {
-            const newGame = loadPositionFromFen(fen);
-            if (newGame) {
-              setGame(newGame);
+    <StatisticsProvider>
+      <div className="app">
+        <h1>Шахматный тренажер</h1>
+        <div>
+          <input
+            type="text"
+            value={fen}
+            onChange={(e) => setFen(e.target.value)}
+            placeholder="Введите FEN позицию"
+          />
+          <button onClick={() => {
+            if (validateFen(fen)) {
+              const newGame = loadPositionFromFen(fen);
+              if (newGame) {
+                setGame(newGame);
+              }
+            } else {
+              alert('Некорректная FEN позиция');
             }
-          } else {
-            alert('Некорректная FEN позиция');
-          }
-        }}>
-          Загрузить позицию
-        </button>
+          }}>
+            Загрузить позицию
+          </button>
+        </div>
+        <Chessboard
+          position={game.fen()}
+          onPieceDrop={onDrop}
+        />
       </div>
-      <Chessboard
-        position={game.fen()}
-        onPieceDrop={onDrop}
-      />
-    </div>
+    </StatisticsProvider>
   )
 }
 
