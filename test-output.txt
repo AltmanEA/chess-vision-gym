@@ -1,0 +1,580 @@
+﻿
+> chess-vision-gym@0.0.0 test:run
+> vitest run src/test/storageService.test.ts
+
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/projects/chess-vision-gym[39m
+
+node.exe : [90mstderr[2m | src/test/storageService.test.ts[2m > [22m[2mimportData[2m > [22m[2mвозвращает false 
+для некорректного JSON
+строка:1 знак:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\EA\AppData\Roaming\npm ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([90mstderr[2m...орректного JSON:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[22m[39mОшибка при импорте данных: SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at importData (C:/projects/chess-vision-gym/src/services/storageService.ts:149:27)
+    at C:/projects/chess-vision-gym/src/test/storageService.test.ts:337:20
+    at [90mfile:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:145:11
+    at [90mfile:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:915:26
+    at [90mfile:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1243:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.j
+s:1209:10[90m)[39m
+    at [90mfile:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1653:37
+    at Traces.$ [90m(file:///C:/projects/chess-vision-gym/[39mnode_modules/[4mvitest[24m/dist/chunks/traces.CCmnQaN
+T.js:142:27[90m)[39m
+
+[90mstderr[2m | src/test/storageService.test.ts[2m > [22m[2mimportData[2m > [22m[2mвозвращает false если отсутс
+твует поле data
+[22m[39mНекорректный формат импортируемых данных
+
+[90mstderr[2m | src/test/storageService.test.ts[2m > [22m[2mimportData[2m > [22m[2mвозвращает false если attemp
+ts не является массивом
+[22m[39mНекорректный формат импортируемых данных
+
+[90mstderr[2m | src/test/storageService.test.ts[2m > [22m[2mОбработка ошибок[2m > [22m[2mвозвращает дефолтные д
+анные при ошибке чтения
+[22m[39mОшибка при чтении данных из localStorage: SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at getData (C:/projects/chess-vision-gym/src/services/storageService.ts:29:23)
+    at getAttempts (C:/projects/chess-vision-gym/src/services/storageService.ts:95:16)
+    at C:/projects/chess-vision-gym/src/test/storageService.test.ts:458:22
+    at [90mfile:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:145:11
+    at [90mfile:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:915:26
+    at [90mfile:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1243:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.j
+s:1209:10[90m)[39m
+    at [90mfile:///C:/projects/chess-vision-gym/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1653:37
+
+ [31m❯[39m src/test/storageService.test.ts [2m([22m[2m26 tests[22m[2m | [22m[31m12 failed[39m[2m)[22m[33m 502[2mms[22m[39m
+     [32m✓[39m сохраняет попытку и возвращает true[32m 1[2mms[22m[39m
+[31m     [31m×[31m сохранённая попытка имеет уникальный ID[39m[32m 6[2mms[22m[39m
+     [32m✓[39m сохранённая попытка добавляется в начало массива[32m 0[2mms[22m[39m
+     [33m[2m✓[22m[39m ограничивает количество попыток до MAX_ATTEMPTS [33m 480[2mms[22m[39m
+[31m     [31m×[31m возвращает пустой массив если нет попыток[39m[32m 3[2mms[22m[39m
+[31m     [31m×[31m возвращает все попытки[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m фильтрует попытки по puzzleId[39m[32m 1[2mms[22m[39m
+     [32m✓[39m возвращает пустой массив если нет попыток для указанного puzzleId[32m 0[2mms[22m[39m
+[31m     [31m×[31m очищает все попытки и возвращает true[39m[32m 1[2mms[22m[39m
+     [32m✓[39m устанавливает дефолтные данные после очистки[32m 0[2mms[22m[39m
+[31m     [31m×[31m удаляет попытки по указанному puzzleId[39m[32m 1[2mms[22m[39m
+     [32m✓[39m возвращает true если нет попыток для удаления[32m 0[2mms[22m[39m
+[31m     [31m×[31m экспортирует данные в JSON строку[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m экспортирует пустые данные если нет попыток[39m[32m 1[2mms[22m[39m
+     [32m✓[39m импортирует данные из JSON строки[32m 0[2mms[22m[39m
+     [32m✓[39m возвращает false для некорректного JSON[32m 1[2mms[22m[39m
+     [32m✓[39m возвращает false если отсутствует поле data[32m 0[2mms[22m[39m
+     [32m✓[39m возвращает false если attempts не является массивом[32m 0[2mms[22m[39m
+     [32m✓[39m возвращает данные без изменений если версия совпадает[32m 0[2mms[22m[39m
+     [32m✓[39m устанавливает текущую версию если версия отсутствует[32m 0[2mms[22m[39m
+     [32m✓[39m возвращает true если localStorage доступен[32m 0[2mms[22m[39m
+     [32m✓[39m возвращает текущую версию если нет данных[32m 0[2mms[22m[39m
+[31m     [31m×[31m возвращает 0 если нет попыток[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m возвращает количество попыток[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m возвращает дефолтные данные при ошибке чтения[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m возвращает false при ошибке записи[39m[32m 0[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 12 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22msaveAttempt[2m > [22mсохранённая попытка имеет у
+никальный ID
+[31m[1mAssertionError[22m: expected [ Array(2) ] to have a length of 1 but got 2[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 2[39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m51:22[22m[39m
+    [90m 49| [39m    [34msaveAttempt[39m(attempt)[33m;[39m
+    [90m 50| [39m    [35mconst[39m attempts [33m=[39m [34mgetAttempts[39m()[33m;[39m
+    [90m 51| [39m    [34mexpect[39m(attempts)[33m.[39m[34mtoHaveLength[39m([34m1[39m)[33m;[39m
+    [90m   | [39m                     [31m^[39m
+    [90m 52| [39m    [34mexpect[39m(attempts[[34m0[39m][33m.[39mid)[33m.[39m[34mtoBeDefined[39m()[33m;[39
+m
+    [90m 53| [39m    [34mexpect[39m([35mtypeof[39m attempts[[34m0[39m][33m.[39mid)[33m.[39m[34mtoBe[39m(
+[32m'string'[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mgetAttempts[2m > [22mвозвращает пустой массив ес
+ли нет попыток
+[31m[1mAssertionError[22m: expected [ Array(4) ] to deeply equal [][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- [][39m
+[31m+ [[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795482-jmwr2b4",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-0",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795482,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795481-j1r8x3f",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795476-6y52egg",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795476,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795475-2o8a155",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795475,[39m
+[31m+   },[39m
+[31m+ ][39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m107:22[22m[39m
+    [90m105| [39m  [34mit[39m([32m'возвращает пустой массив если нет попыток'[39m[33m,[39m () [33m=>[39m {
+    [90m106| [39m    [35mconst[39m attempts [33m=[39m [34mgetAttempts[39m()[33m;[39m
+    [90m107| [39m    [34mexpect[39m(attempts)[33m.[39m[34mtoEqual[39m([])[33m;[39m
+    [90m   | [39m                     [31m^[39m
+    [90m108| [39m  })[33m;[39m
+    [90m109| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mgetAttempts[2m > [22mвозвращает все попытки
+[31m[1mAssertionError[22m: expected [ Array(6) ] to have a length of 2 but got 6[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 2[39m
+[31m+ 6[39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m131:22[22m[39m
+    [90m129| [39m    [34msaveAttempt[39m(attempt2)[33m;[39m
+    [90m130| [39m    [35mconst[39m attempts [33m=[39m [34mgetAttempts[39m()[33m;[39m
+    [90m131| [39m    [34mexpect[39m(attempts)[33m.[39m[34mtoHaveLength[39m([34m2[39m)[33m;[39m
+    [90m   | [39m                     [31m^[39m
+    [90m132| [39m  })[33m;[39m
+    [90m133| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mgetAttempts[2m > [22mфильтрует попытки по puzzle
+Id
+[31m[1mAssertionError[22m: expected [ Array(6) ] to have a length of 2 but got 6[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 2[39m
+[31m+ 6[39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m164:22[22m[39m
+    [90m162| [39m    [34msaveAttempt[39m(attempt3)[33m;[39m
+    [90m163| [39m    [35mconst[39m attempts [33m=[39m [34mgetAttempts[39m([32m'puzzle-1'[39m)[33m;[39m
+    [90m164| [39m    [34mexpect[39m(attempts)[33m.[39m[34mtoHaveLength[39m([34m2[39m)[33m;[39m
+    [90m   | [39m                     [31m^[39m
+    [90m165| [39m    [34mexpect[39m(attempts[33m.[39m[34mevery[39m(a [33m=>[39m a[33m.[39mpuzzleId [33m===
+[39m [32m'puzzle-1'[39m))[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m166| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mclearAttempts[2m > [22mочищает все попытки и воз
+вращает true
+[31m[1mAssertionError[22m: expected [ Array(8) ] to have a length of 1 but got 8[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 8[39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m203:27[22m[39m
+    [90m201| [39m
+    [90m202| [39m    [34msaveAttempt[39m(attempt)[33m;[39m
+    [90m203| [39m    [34mexpect[39m([34mgetAttempts[39m())[33m.[39m[34mtoHaveLength[39m([34m1[39m)[33m;[3
+9m
+    [90m   | [39m                          [31m^[39m
+    [90m204| [39m
+    [90m205| [39m    [35mconst[39m result [33m=[39m [34mclearAttempts[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mclearAttemptsByPuzzleId[2m > [22mудаляет попытки
+ по указанному puzzleId
+[31m[1mAssertionError[22m: expected [ Array(2) ] to have a length of 1 but got 2[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 2[39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m258:22[22m[39m
+    [90m256| [39m
+    [90m257| [39m    [35mconst[39m attempts [33m=[39m [34mgetAttempts[39m()[33m;[39m
+    [90m258| [39m    [34mexpect[39m(attempts)[33m.[39m[34mtoHaveLength[39m([34m1[39m)[33m;[39m
+    [90m   | [39m                     [31m^[39m
+    [90m259| [39m    [34mexpect[39m(attempts[[34m0[39m][33m.[39mpuzzleId)[33m.[39m[34mtoBe[39m([32m'puzzle
+-2'[39m)[33m;[39m
+    [90m260| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mexportData[2m > [22mэкспортирует данные в JSON с
+троку
+[31m[1mAssertionError[22m: expected [ …(11) ] to have a length of 1 but got 11[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 11[39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m294:32[22m[39m
+    [90m292| [39m    [34mexpect[39m(data[33m.[39mexportedAt)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+    [90m293| [39m    [34mexpect[39m(data[33m.[39mdata)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+    [90m294| [39m    [34mexpect[39m(data[33m.[39mdata[33m.[39mattempts)[33m.[39m[34mtoHaveLength[39m([34m1
+[39m)[33m;[39m
+    [90m   | [39m                               [31m^[39m
+    [90m295| [39m  })[33m;[39m
+    [90m296| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mexportData[2m > [22mэкспортирует пустые данные е
+сли нет попыток
+[31m[1mAssertionError[22m: expected [ …(11) ] to deeply equal [][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- [][39m
+[31m+ [[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795967-ilkdnz3",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795967-lvj4trz",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795966-u8diyw4",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795966-2xvutrf",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795965-k02fyzm",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795965-ena6evb",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795964-iafs52h",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795482-jmwr2b4",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-0",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795482,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795481-j1r8x3f",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795476-6y52egg",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795476,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795475-2o8a155",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795475,[39m
+[31m+   },[39m
+[31m+ ][39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m300:32[22m[39m
+    [90m298| [39m    [35mconst[39m exported [33m=[39m [34mexportData[39m()[33m;[39m
+    [90m299| [39m    [35mconst[39m data [33m=[39m [33mJSON[39m[33m.[39m[34mparse[39m(exported)[33m;[39m
+    [90m300| [39m    [34mexpect[39m(data[33m.[39mdata[33m.[39mattempts)[33m.[39m[34mtoEqual[39m([])[33m;[
+39m
+    [90m   | [39m                               [31m^[39m
+    [90m301| [39m  })[33m;[39m
+    [90m302| [39m})[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mgetAttemptsCount[2m > [22mвозвращает 0 если нет 
+попыток
+[31m[1mAssertionError[22m: expected 11 to be +0 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 0[39m
+[31m+ 11[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m12 failed[39m[22m[2m | [22m[1m[32m14 passed[39m[22m[90m (26)[39m
+[2m   Start at [22m 12:29:54
+[2m   Duration [22m 1.42s[2m (transform 54ms, setup 85ms, import 46ms, tests 502ms, environment 629ms)[22m
+
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m424:19[22m[39m
+    [90m422| [39m  [34mit[39m([32m'возвращает 0 если нет попыток'[39m[33m,[39m () [33m=>[39m {
+    [90m423| [39m    [35mconst[39m count [33m=[39m [34mgetAttemptsCount[39m()[33m;[39m
+    [90m424| [39m    [34mexpect[39m(count)[33m.[39m[34mtoBe[39m([34m0[39m)[33m;[39m
+    [90m   | [39m                  [31m^[39m
+    [90m425| [39m  })[33m;[39m
+    [90m426| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mgetAttemptsCount[2m > [22mвозвращает количество 
+попыток
+[31m[1mAssertionError[22m: expected 14 to be 3 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 3[39m
+[31m+ 14[39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m442:19[22m[39m
+    [90m440| [39m
+    [90m441| [39m    [35mconst[39m count [33m=[39m [34mgetAttemptsCount[39m()[33m;[39m
+    [90m442| [39m    [34mexpect[39m(count)[33m.[39m[34mtoBe[39m([34m3[39m)[33m;[39m
+    [90m   | [39m                  [31m^[39m
+    [90m443| [39m  })[33m;[39m
+    [90m444| [39m})[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mОбработка ошибок[2m > [22mвозвращает дефолтные д
+анные при ошибке чтения
+[31m[1mAssertionError[22m: expected [ …(12) ] to deeply equal [][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- [][39m
+[31m+ [[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795973-qx04hq1",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795967-ilkdnz3",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795967-lvj4trz",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795966-u8diyw4",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795966-2xvutrf",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795965-k02fyzm",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795965-ena6evb",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795964-iafs52h",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795482-jmwr2b4",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-0",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795482,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795481-j1r8x3f",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1000,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795476-6y52egg",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795476,[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "answer": "e4",[39m
+[31m+     "id": "attempt-1771741795475-2o8a155",[39m
+[31m+     "isCorrect": true,[39m
+[31m+     "puzzleId": "puzzle-1",[39m
+[31m+     "puzzleType": "field",[39m
+[31m+     "timeSpent": 5000,[39m
+[31m+     "timestamp": 1771741795475,[39m
+[31m+   },[39m
+[31m+ ][39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m459:22[22m[39m
+    [90m457| [39m
+    [90m458| [39m    [35mconst[39m attempts [33m=[39m [34mgetAttempts[39m()[33m;[39m
+    [90m459| [39m    [34mexpect[39m(attempts)[33m.[39m[34mtoEqual[39m([])[33m;[39m
+    [90m   | [39m                     [31m^[39m
+    [90m460| [39m  })[33m;[39m
+    [90m461| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/test/storageService.test.ts[2m > [22mОбработка ошибок[2m > [22mвозвращает false при о
+шибке записи
+[31m[1mAssertionError[22m: expected true to be false // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- false[39m
+[31m+ true[39m
+
+[36m [2m❯[22m src/test/storageService.test.ts:[2m479:20[22m[39m
+    [90m477| [39m
+    [90m478| [39m    [35mconst[39m result [33m=[39m [34msaveAttempt[39m(attempt)[33m;[39m
+    [90m479| [39m    [34mexpect[39m(result)[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m480| [39m
+    [90m481| [39m    [90m// Восстанавливаем оригинальный метод[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯[22m[39m
+

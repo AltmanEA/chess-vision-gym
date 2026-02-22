@@ -76,6 +76,8 @@ export function validatePuzzle(puzzle: Puzzle): { valid: boolean; errors: string
     case 'move': {
       if (!puzzle.answer?.moves || !Array.isArray(puzzle.answer.moves)) {
         errors.push('Отсутствуют или некорректны ходы в ответе');
+      } else if (puzzle.answer.moves.length === 0) {
+        errors.push('Отсутствуют или некорректны ходы в ответе');
       } else {
         puzzle.answer.moves.forEach((move, index) => {
           if (!validateUciMove(move)) {
@@ -88,6 +90,8 @@ export function validatePuzzle(puzzle: Puzzle): { valid: boolean; errors: string
     case 'sequence':
     case 'lichess': {
       if (!puzzle.answer?.moves || !Array.isArray(puzzle.answer.moves)) {
+        errors.push('Отсутствуют или некорректны ходы в ответе');
+      } else if (puzzle.answer.moves.length === 0) {
         errors.push('Отсутствуют или некорректны ходы в ответе');
       } else {
         puzzle.answer.moves.forEach((move, index) => {
