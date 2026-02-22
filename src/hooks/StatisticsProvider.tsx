@@ -2,7 +2,7 @@
  * React Provider для работы со статистикой
  */
 
-import { useCallback, useEffect, useState, ReactNode } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { saveAttempt, getAttempts, clearAttempts, clearAttemptsByPuzzleId } from '../services/storageService';
 import { StatisticsContext, type StatisticsContextValue } from './statisticsContext';
 import type { UserAttempt } from '../types/statistics';

@@ -122,6 +122,7 @@ describe('validatePuzzle', () => {
 
     it('возвращает ошибку если отсутствует id', () => {
       const puzzle = {
+        id: '' as const,
         type: 'field' as const,
         fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
         instruction: 'Тест',
@@ -244,6 +245,7 @@ describe('validatePuzzle', () => {
         puzzleId: '12345',
         fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
         answer: { moves: ['e2e4'] },
+        rating: 1200,
       };
       const result = validatePuzzle(puzzle);
       expect(result.valid).toBe(true);
@@ -256,8 +258,11 @@ describe('validatePuzzle', () => {
       const puzzle = {
         id: 'test',
         type: 'unknown' as const,
+        puzzleId: 'unknown-1',
         fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-      };
+        answer: { moves: [] },
+        rating: 1200,
+      } as unknown as Puzzle;
       const result = validatePuzzle(puzzle);
       expect(result.valid).toBe(false);
       expect(result.errors).toContain('Неизвестный тип задачи: unknown');
@@ -482,8 +487,11 @@ describe('checkAnswer', () => {
     const puzzle = {
       id: 'test',
       type: 'unknown' as const,
+      puzzleId: 'unknown-1',
       fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-    };
+      answer: { moves: [] },
+      rating: 1200,
+    } as unknown as Puzzle;
     expect(checkAnswer(puzzle, 'test')).toBe(false);
   });
 });

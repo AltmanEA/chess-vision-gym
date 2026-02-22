@@ -2,12 +2,13 @@
  * React хуки для работы со статистикой
  */
 
-import { useStatisticsContext } from './StatisticsProvider';
+import { useStatisticsContext } from './statisticsContext';
 import type {
   PuzzleStatistics,
   GlobalStatistics,
   TypeStatistics,
   PuzzleType,
+  UserAttempt,
 } from '../types/statistics';
 
 // ============================================
@@ -32,7 +33,7 @@ export function useAttempts(puzzleId?: string) {
   const { attempts, refreshAttempts } = useStatisticsContext();
 
   const filteredAttempts = puzzleId
-    ? attempts.filter((attempt) => attempt.puzzleId === puzzleId)
+    ? attempts.filter((attempt: UserAttempt) => attempt.puzzleId === puzzleId)
     : attempts;
 
   return {
@@ -49,24 +50,24 @@ export function useAttempts(puzzleId?: string) {
 export function usePuzzleStats(puzzleId: string): PuzzleStatistics {
   const { attempts } = useStatisticsContext();
 
-  const puzzleAttempts = attempts.filter((attempt) => attempt.puzzleId === puzzleId);
+  const puzzleAttempts = attempts.filter((attempt: { puzzleId: string }) => attempt.puzzleId === puzzleId);
 
   // Вычисляем статистику на основе attempts
   const totalAttempts = puzzleAttempts.length;
-  const correctAttempts = puzzleAttempts.filter((attempt) => attempt.isCorrect).length;
+  const correctAttempts = puzzleAttempts.filter((attempt: UserAttempt) => attempt.isCorrect).length;
   const accuracy = totalAttempts > 0 ? (correctAttempts / totalAttempts) * 100 : 0;
   const averageTime =
     totalAttempts > 0
-      ? puzzleAttempts.reduce((sum, attempt) => sum + attempt.timeSpent, 0) / totalAttempts
+      ? puzzleAttempts.reduce((sum: number, attempt: UserAttempt) => sum + attempt.timeSpent, 0) / totalAttempts
       : 0;
-  const correctPuzzleAttempts = puzzleAttempts.filter((attempt) => attempt.isCorrect);
+  const correctPuzzleAttempts = puzzleAttempts.filter((attempt: UserAttempt) => attempt.isCorrect);
   const bestTime =
     correctPuzzleAttempts.length > 0
-      ? Math.min(...correctPuzzleAttempts.map((attempt) => attempt.timeSpent))
+      ? Math.min(...correctPuzzleAttempts.map((attempt: UserAttempt) => attempt.timeSpent))
       : null;
   const isSolved = correctAttempts > 0;
   const lastAttemptAt =
-    totalAttempts > 0 ? Math.max(...puzzleAttempts.map((attempt) => attempt.timestamp)) : 0;
+    totalAttempts > 0 ? Math.max(...puzzleAttempts.map((attempt: UserAttempt) => attempt.timestamp)) : 0;
 
   return {
     puzzleId,
@@ -88,20 +89,20 @@ export function useGlobalStats(): GlobalStatistics {
   const { attempts } = useStatisticsContext();
 
   const totalAttempts = attempts.length;
-  const correctAttempts = attempts.filter((attempt) => attempt.isCorrect).length;
+  const correctAttempts = attempts.filter((attempt: UserAttempt) => attempt.isCorrect).length;
   const accuracy = totalAttempts > 0 ? (correctAttempts / totalAttempts) * 100 : 0;
   const averageTime =
     totalAttempts > 0
-      ? attempts.reduce((sum, attempt) => sum + attempt.timeSpent, 0) / totalAttempts
+      ? attempts.reduce((sum: number, attempt: UserAttempt) => sum + attempt.timeSpent, 0) / totalAttempts
       : 0;
 
   const solvedPuzzleIds = new Set(
-    attempts.filter((attempt) => attempt.isCorrect).map((attempt) => attempt.puzzleId)
+    attempts.filter((attempt: UserAttempt) => attempt.isCorrect).map((attempt: UserAttempt) => attempt.puzzleId)
   );
   const uniquePuzzlesSolved = solvedPuzzleIds.size;
 
   const lastAttemptAt =
-    totalAttempts > 0 ? Math.max(...attempts.map((attempt) => attempt.timestamp)) : 0;
+    totalAttempts > 0 ? Math.max(...attempts.map((attempt: UserAttempt) => attempt.timestamp)) : 0;
 
   return {
     totalAttempts,
@@ -123,23 +124,23 @@ export function useStatsByType(): TypeStatistics[] {
   const types: PuzzleType[] = ['field', 'move', 'sequence', 'lichess'];
 
   return types.map((type) => {
-    const typeAttempts = attempts.filter((attempt) => attempt.puzzleType === type);
+    const typeAttempts = attempts.filter((attempt: UserAttempt) => attempt.puzzleType === type);
 
     const totalAttempts = typeAttempts.length;
-    const correctAttempts = typeAttempts.filter((attempt) => attempt.isCorrect).length;
+    const correctAttempts = typeAttempts.filter((attempt: UserAttempt) => attempt.isCorrect).length;
     const accuracy = totalAttempts > 0 ? (correctAttempts / totalAttempts) * 100 : 0;
     const averageTime =
       totalAttempts > 0
-        ? typeAttempts.reduce((sum, attempt) => sum + attempt.timeSpent, 0) / totalAttempts
+        ? typeAttempts.reduce((sum: number, attempt: UserAttempt) => sum + attempt.timeSpent, 0) / totalAttempts
         : 0;
 
     const solvedPuzzleIds = new Set(
-      typeAttempts.filter((attempt) => attempt.isCorrect).map((attempt) => attempt.puzzleId)
+      typeAttempts.filter((attempt: UserAttempt) => attempt.isCorrect).map((attempt: UserAttempt) => attempt.puzzleId)
     );
     const uniquePuzzlesSolved = solvedPuzzleIds.size;
 
     const lastAttemptAt =
-      totalAttempts > 0 ? Math.max(...typeAttempts.map((attempt) => attempt.timestamp)) : 0;
+      totalAttempts > 0 ? Math.max(...typeAttempts.map((attempt: UserAttempt) => attempt.timestamp)) : 0;
 
     return {
       type,

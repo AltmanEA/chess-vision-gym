@@ -12,3 +12,4 @@ export {
   useClearAttempts,
   useClearPuzzleAttempts,
 } from './useStatistics';
+export { usePuzzleAnswer } from './usePuzzleAnswer';
