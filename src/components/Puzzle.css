@@ -1,0 +1,144 @@
+.puzzle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.puzzle-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.puzzle-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.puzzle-difficulty {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.puzzle-difficulty--beginner {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.puzzle-difficulty--intermediate {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.puzzle-difficulty--advanced {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.puzzle-difficulty--expert {
+  background-color: #f5c6cb;
+  color: #721c24;
+}
+
+.puzzle-rating {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.puzzle-instruction {
+  width: 100%;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #007bff;
+  border-radius: 0.25rem;
+}
+
+.puzzle-instruction p {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.puzzle-board-container {
+  display: flex;
+  justify-content: center;
+}
+
+.puzzle-controls {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.puzzle-button {
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.puzzle-button:hover {
+  transform: translateY(-1px);
+}
+
+.puzzle-button:active {
+  transform: translateY(0);
+}
+
+.puzzle-button--reset {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.puzzle-button--reset:hover {
+  background-color: #5a6268;
+}
+
+.puzzle-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+}
+
+.puzzle-themes-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.puzzle-themes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.puzzle-theme {
+  padding: 0.25rem 0.75rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  color: #495057;
+}

@@ -1,65 +1,29 @@
-import { useState } from 'react'
-import { Chessboard } from 'react-chessboard'
-import { Chess } from 'chess.js'
-import { validateFen, loadPositionFromFen, setInitialPosition } from './utils/fenUtils'
+import { Puzzle } from './components/Puzzle'
 import { StatisticsProvider } from './hooks'
+import type { Puzzle as PuzzleType } from './types/puzzle'
 import './App.css'
 
+// Пример задачи для демонстрации (тип "move")
+const examplePuzzle: PuzzleType = {
+  id: 'move-001',
+  type: 'move',
+  fen: 'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 3',
+  instruction: 'Найдите лучший ход для белых',
+  answer: {
+    moves: ['c4f7'],
+    allowAlternatives: false,
+  },
+  themes: ['tactics', 'fork', 'knight'],
+  difficulty: 'intermediate',
+  rating: 1400,
+}
+
 function App() {
-  const [fen, setFen] = useState('')
-  const [game, setGame] = useState(setInitialPosition())
-
-  function makeAMove(move: { from: string; to: string; promotion?: string }) {
-    const gameCopy = new Chess(game.fen())
-    
-    try {
-      gameCopy.move(move)
-      setGame(gameCopy)
-    } catch (e) {
-      console.log('Invalid move:', e)
-      return false
-    }
-    return true
-  }
-
-  function onDrop(sourceSquare: string, targetSquare: string) {
-    const move = makeAMove({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: 'q'
-    })
-    
-    return move
-  }
-
   return (
     <StatisticsProvider>
       <div className="app">
         <h1>Шахматный тренажер</h1>
-        <div>
-          <input
-            type="text"
-            value={fen}
-            onChange={(e) => setFen(e.target.value)}
-            placeholder="Введите FEN позицию"
-          />
-          <button onClick={() => {
-            if (validateFen(fen)) {
-              const newGame = loadPositionFromFen(fen);
-              if (newGame) {
-                setGame(newGame);
-              }
-            } else {
-              alert('Некорректная FEN позиция');
-            }
-          }}>
-            Загрузить позицию
-          </button>
-        </div>
-        <Chessboard
-          position={game.fen()}
-          onPieceDrop={onDrop}
-        />
+        <Puzzle puzzle={examplePuzzle} />
       </div>
     </StatisticsProvider>
   )
